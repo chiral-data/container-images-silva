@@ -1,0 +1,34 @@
+#!/bin/bash
+#
+
+REGISTRY_URL="chiral.sakuracr.jp"
+today=$(date +"%Y_%m_%d")
+
+SUBFOLDERS=$(find . -mindepth 2 -maxdepth 2 -type d ! -path "*/.git*")
+
+for DIR in $SUBFOLDERS; do
+    echo "Entering $DIR"
+
+    # Enter application folder
+    cd "$DIR" || {
+        echo "Failed to enter $DIR"
+        continue
+    }
+
+    # Run the command
+    app_name=$(basename "$PWD")
+    image_name=${app_name}_${today}
+    echo "Building container image $image_name"
+    echo ""
+    docker build -t ${image_name} --platform linux/amd64 .
+    docker run --gpus all ${image_name}
+
+    echo "Tag container image $image_name"
+    docker tag ${image_name} ${REGISTRY_URL}/${app_name}:${today}
+
+    echo "Push container image $image_name"
+    docker push ${REGISTRY_URL}/${app_name}:${today}
+
+    # Return to the original base directory
+    cd - >/dev/null
+done
