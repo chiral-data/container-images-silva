@@ -1,6 +1,6 @@
 # container-images-silva
 
-## Container Images
+## How to use
 
 Application container images are hosted on our private registry at `chiral.sakuracr.jp`.
 To pull a specific application image, use the following format:
@@ -19,3 +19,9 @@ Where:
 ```bash
 docker pull chiral.sakuracr.jp:/gromacs:2025_09_05
 ```
+
+## How to build a new image
+
+1. create a new directory as `./a/app_date`. For test builds, append a version suffix, such as `_v1` (e.g., `app_date_v1`).
+2. create the `Dockerfile`
+3. Execute the `build.sh` script from the project's root directory using the command: `bash build.sh ./a/app_date_v1`.
