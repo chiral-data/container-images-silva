@@ -19,3 +19,8 @@ Where:
 ```bash
 docker pull chiral.sakuracr.jp:/gromacs:2025_09_05
 ```
+
+## Tips for image build
+
+- name the directory like "app_date", if it is for testing, name as "app_date_v1"
+- run the build.sh under the root folder of the project
