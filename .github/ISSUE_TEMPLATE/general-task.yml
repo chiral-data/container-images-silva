@@ -1,6 +1,6 @@
 name: General Development Task Creation
 description: no desp
-title: "[2508 MVP - Design] "
+title: "2510-Exhibition iter-2【Application】"
 projects: ["chiral-data/5"]
 body:
   - type: textarea
