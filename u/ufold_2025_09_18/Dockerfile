@@ -52,6 +52,10 @@ RUN pip install --no-cache-dir \
 WORKDIR /opt
 RUN git clone https://github.com/uci-cbcl/UFold.git
 
+# Copy data and models folders into the UFold directory
+COPY data/ /opt/UFold/data/
+COPY models/ /opt/UFold/models/
+
 # Add UFold to Python path
 ENV PYTHONPATH="/opt/UFold:${PYTHONPATH}"
 
