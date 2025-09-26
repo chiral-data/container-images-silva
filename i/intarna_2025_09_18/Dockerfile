@@ -8,5 +8,7 @@ WORKDIR /workspace
 # The biocontainer already includes IntaRNA and all dependencies
 # IntaRNA is available in the PATH
 
+# Python is available for JSON processing (no additional packages needed)
+
 # Default command, used for verification
 CMD ["IntaRNA", "--help"]
