@@ -30,15 +30,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1 libglu1-mesa \
     # 並列計算（MPI）
     libopenmpi-dev openmpi-bin \
+    curl \ 
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
 # conda環境の設定
 ENV CONDA_DEFAULT_ENV=base
 ENV PATH="/opt/conda/bin:${PATH}"
-
-# 作業ディレクトリ
-WORKDIR /work
 
 # conda環境の作成とパッケージのインストール
 RUN conda create -n in_silico python=3.13 -y
@@ -91,12 +89,12 @@ RUN conda install -n in_silico -y \
 RUN /opt/conda/envs/in_silico/bin/pip install \
     py3Dmol==2.0.4
 
-# sminaのstatic版をコピーして実行権限を付与
-COPY 2-input/smina.static /usr/local/bin/smina
+# download smina static version and add execution permission
+RUN curl -Lo /usr/local/bin/smina https://sourceforge.net/projects/smina/files/smina.static/download
 RUN chmod +x /usr/local/bin/smina
 
-# その他のファイルをコピー
-COPY . /work
+# Create a working directory
+WORKDIR /workspace
 
 # デフォルト動作（継続実行）
-CMD ["tail", "-f", "/dev/null"]
+CMD ["smina", "--version"]
