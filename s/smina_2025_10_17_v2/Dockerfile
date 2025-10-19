@@ -96,5 +96,6 @@ RUN chmod +x /usr/local/bin/smina
 # Create a working directory
 WORKDIR /workspace
 
-# デフォルト動作（継続実行）
 CMD ["smina", "--version"]
+# デフォルト動作（継続実行）
+CMD ["tail", "-f", "/dev/null"]
