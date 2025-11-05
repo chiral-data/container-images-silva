@@ -90,7 +90,8 @@ RUN conda install -n in_silico -y \
     h5py
 
 # pipでcondaにないパッケージをインストール（Python 3.13対応版）
-RUN /opt/conda/envs/in_silico/bin/pip install \
+RUN conda install -n in_silico -y pip \
+&& /opt/conda/envs/in_silico/bin/pip install \
     py3Dmol==2.0.4
 
 # download smina static version and add execution permission
