@@ -1,7 +1,7 @@
 # Dockerfile for smina (Scoring and Minimization with AutoDock Vina)
 # https://sourceforge.net/projects/smina/
 #
-# 2025-11-05: add bioconda mgltools (by Qin Wan)
+# 2025-11-05: add mgltools, pdb2pqr (by Qin Wan)
 # 2025-10-17: Modified by Qin Wan (rogerwq@gmail.com) 
 # Created by Koki Shinbara 
 #
@@ -68,9 +68,6 @@ RUN conda install -n in_silico -y \
     pdb2pqr \
     rdkit
 
-RUN conda install -n in_silico -c bioconda -y \
-    mgltools
-
 # その他のパッケージ
 RUN conda install -n in_silico -y \
     requests \
@@ -90,13 +87,18 @@ RUN conda install -n in_silico -y \
     h5py
 
 # pipでcondaにないパッケージをインストール（Python 3.13対応版）
-RUN conda install -n in_silico -y pip \
-&& /opt/conda/envs/in_silico/bin/pip install \
+RUN /opt/conda/envs/in_silico/bin/pip install \
     py3Dmol==2.0.4
 
 # download smina static version and add execution permission
 RUN curl -Lo /usr/local/bin/smina https://sourceforge.net/projects/smina/files/smina.static/download
 RUN chmod +x /usr/local/bin/smina
+
+# Install mgltools, pdb2pqr
+RUN conda install -n in_silico -c bioconda -y \
+    mgltools
+RUN conda install -n in_silico -c conda-forge -y \
+    pdb2pqr
 
 # Create a working directory
 WORKDIR /workspace
