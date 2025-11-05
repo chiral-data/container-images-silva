@@ -1,7 +1,7 @@
 # Dockerfile for smina (Scoring and Minimization with AutoDock Vina)
 # https://sourceforge.net/projects/smina/
 #
-# 2025-11-05: add mgltools, pdb2pqr (by Qin Wan)
+# 2025-11-05: add mgltools (by Qin Wan)
 # 2025-10-17: Modified by Qin Wan (rogerwq@gmail.com) 
 # Created by Koki Shinbara 
 #
@@ -94,11 +94,9 @@ RUN /opt/conda/envs/in_silico/bin/pip install \
 RUN curl -Lo /usr/local/bin/smina https://sourceforge.net/projects/smina/files/smina.static/download
 RUN chmod +x /usr/local/bin/smina
 
-# Install mgltools, pdb2pqr
+# Install mgltools
 RUN conda install -n in_silico -c bioconda -y \
     mgltools
-RUN conda install -n in_silico -c conda-forge -y \
-    pdb2pqr
 
 # Create a working directory
 WORKDIR /workspace
