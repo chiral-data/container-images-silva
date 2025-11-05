@@ -66,8 +66,9 @@ RUN conda install -n in_silico -y \
     openmm \
     pdbfixer \
     pdb2pqr \
-    rdkit \
-    bioconda \
+    rdkit
+
+RUN conda install -n in_silico -c bioconda -y \
     mgltools
 
 # その他のパッケージ
