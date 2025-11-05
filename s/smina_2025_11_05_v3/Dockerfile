@@ -1,6 +1,7 @@
 # Dockerfile for smina (Scoring and Minimization with AutoDock Vina)
 # https://sourceforge.net/projects/smina/
 #
+# 2025-11-05: add bioconda mgltools (by Qin Wan)
 # 2025-10-17: Modified by Qin Wan (rogerwq@gmail.com) 
 # Created by Koki Shinbara 
 #
@@ -65,7 +66,9 @@ RUN conda install -n in_silico -y \
     openmm \
     pdbfixer \
     pdb2pqr \
-    rdkit
+    rdkit \
+    bioconda \
+    mgltools
 
 # その他のパッケージ
 RUN conda install -n in_silico -y \
