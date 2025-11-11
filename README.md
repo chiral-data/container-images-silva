@@ -6,7 +6,7 @@ Application container images are hosted on our private registry at `chiral.sakur
 To pull a specific application image, use the following format:
 
 ```bash
-docker pull chiral.sakuracr.jp:/<app_name>:<date_tag>
+docker pull chiral.sakuracr.jp/<app_name>:<date_tag>
 ```
 
 Where:
